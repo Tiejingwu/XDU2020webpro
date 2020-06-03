@@ -1,0 +1,39 @@
+package Test;
+
+import com.message.model.User;
+import com.message.service.impl.UserServiceImpl;
+
+public class UserServiceTest {
+    
+	UserServiceImpl test;
+	User user;
+    
+	@Before
+	public void SetUp() throws Exception{
+		test=new UserServiceImpl();
+	}
+	@Test
+	public void testfindUserByQq() throws Exception{
+		test.findUserByQq("6498433865");
+	}
+	@Test
+	public void testregister() throws Exception{
+		test.register(user);
+	}
+	@Test
+	public void testfindUserById() throws Exception{
+		test.findUserById(1);
+	}
+	@Test
+	public void testupdateUser() throws Exception{
+		test.updateUser(user);
+	}
+	@Test
+	public void testfindUserByUsername() throws Exception{
+		test.findUserByUsername("霍肖肖");
+	}
+	@Test
+	public void testfindUserByQqOrUsername() throws Exception{
+		test.findUserByQqOrUsername("霍肖肖","6498433865",1);
+	}
+}
