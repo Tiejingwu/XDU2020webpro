@@ -1,0 +1,73 @@
+@charset "utf-8";
+
+.w1 {
+	width: 840px;
+	margin: 0 auto;
+}
+#entry {
+	left:0px;
+	padding: 5px;
+	margin: 0px auto 7px;
+	position: relative;
+}
+
+#entry .item-ifo .ico {
+	position: absolute;
+	right: 12px;
+}
+
+#entry .item-ifo .i-name {
+	background: url(../img/login-all-bg.png) no-repeat -373px -111px #fff;
+	left:280px;
+	width: 16px;
+	height: 16px;
+	top: 15px;
+}
+#entry .label {
+	width: 100px;
+	text-align: right;
+	font-size: 14px;
+}
+
+#entry .text {
+	float: none;
+	width: 282px;
+	height: 24px;
+	line-height: 24px;
+	padding: 4px 20px 4px 3px;
+	border: 1px solid #cccccc;
+	font-size: 14px;
+	font-family: arial, "宋体";
+}
+.shortselect{  
+    background:#fafdfe;  
+    height:35px;  
+    width:80px;  
+    line-height:28px;  
+    border:1px solid #9bc0dd;  
+    -moz-border-radius:2px;  
+    -webkit-border-radius:2px;  
+    border-radius:2px;  
+}  
+
+
+.right {
+	float: left;
+	margin-left: 55px;
+	width:840px;
+	text-align: center;
+	
+}
+.head_right{
+float: right;	
+padding-top: 100px;	
+padding-right:0px;
+}
+
+.qquser {
+	float: left;
+	border: #9ca5cc 1px solid ;
+	padding: 0px;
+	margin:0px;
+	width: 170px;
+}
