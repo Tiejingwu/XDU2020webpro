@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.message.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.message.model.Message" >
+    <id column="messageid" property="messageid" jdbcType="INTEGER" />
+    <result column="receiveid" property="receiveid" jdbcType="INTEGER" />
+    <result column="senderid" property="senderid" jdbcType="INTEGER" />
+    <result column="messagetime" property="messagetime" jdbcType="TIMESTAMP" />
+    <result column="parentmessageid" property="parentmessageid" jdbcType="INTEGER" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.message.model.Message" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    messageid, receiveid, senderid, messagetime, parentmessageid, pic
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.message.model.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.message.model.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    where messageid = #{messageid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where messageid = #{messageid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.message.model.MessageExample" >
+    delete from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.message.model.Message" >
+    insert into message (messageid, receiveid, senderid, 
+      messagetime, parentmessageid, pic, 
+      content)
+    values (#{messageid,jdbcType=INTEGER}, #{receiveid,jdbcType=INTEGER}, #{senderid,jdbcType=INTEGER}, 
+      #{messagetime,jdbcType=TIMESTAMP}, #{parentmessageid,jdbcType=INTEGER}, #{pic,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.message.model.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        messageid,
+      </if>
+      <if test="receiveid != null" >
+        receiveid,
+      </if>
+      <if test="senderid != null" >
+        senderid,
+      </if>
+      <if test="messagetime != null" >
+        messagetime,
+      </if>
+      <if test="parentmessageid != null" >
+        parentmessageid,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        #{messageid,jdbcType=INTEGER},
+      </if>
+      <if test="receiveid != null" >
+        #{receiveid,jdbcType=INTEGER},
+      </if>
+      <if test="senderid != null" >
+        #{senderid,jdbcType=INTEGER},
+      </if>
+      <if test="messagetime != null" >
+        #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentmessageid != null" >
+        #{parentmessageid,jdbcType=INTEGER},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.message.model.MessageExample" resultType="java.lang.Integer" >
+    select count(*) from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update message
+    <set >
+      <if test="record.messageid != null" >
+        messageid = #{record.messageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveid != null" >
+        receiveid = #{record.receiveid,jdbcType=INTEGER},
+      </if>
+      <if test="record.senderid != null" >
+        senderid = #{record.senderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.messagetime != null" >
+        messagetime = #{record.messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.parentmessageid != null" >
+        parentmessageid = #{record.parentmessageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pic != null" >
+        pic = #{record.pic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update message
+    set messageid = #{record.messageid,jdbcType=INTEGER},
+      receiveid = #{record.receiveid,jdbcType=INTEGER},
+      senderid = #{record.senderid,jdbcType=INTEGER},
+      messagetime = #{record.messagetime,jdbcType=TIMESTAMP},
+      parentmessageid = #{record.parentmessageid,jdbcType=INTEGER},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update message
+    set messageid = #{record.messageid,jdbcType=INTEGER},
+      receiveid = #{record.receiveid,jdbcType=INTEGER},
+      senderid = #{record.senderid,jdbcType=INTEGER},
+      messagetime = #{record.messagetime,jdbcType=TIMESTAMP},
+      parentmessageid = #{record.parentmessageid,jdbcType=INTEGER},
+      pic = #{record.pic,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.message.model.Message" >
+    update message
+    <set >
+      <if test="receiveid != null" >
+        receiveid = #{receiveid,jdbcType=INTEGER},
+      </if>
+      <if test="senderid != null" >
+        senderid = #{senderid,jdbcType=INTEGER},
+      </if>
+      <if test="messagetime != null" >
+        messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentmessageid != null" >
+        parentmessageid = #{parentmessageid,jdbcType=INTEGER},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where messageid = #{messageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.message.model.Message" >
+    update message
+    set receiveid = #{receiveid,jdbcType=INTEGER},
+      senderid = #{senderid,jdbcType=INTEGER},
+      messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      parentmessageid = #{parentmessageid,jdbcType=INTEGER},
+      pic = #{pic,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where messageid = #{messageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.message.model.Message" >
+    update message
+    set receiveid = #{receiveid,jdbcType=INTEGER},
+      senderid = #{senderid,jdbcType=INTEGER},
+      messagetime = #{messagetime,jdbcType=TIMESTAMP},
+      parentmessageid = #{parentmessageid,jdbcType=INTEGER},
+      pic = #{pic,jdbcType=VARCHAR}
+    where messageid = #{messageid,jdbcType=INTEGER}
+  </update>
+</mapper>
