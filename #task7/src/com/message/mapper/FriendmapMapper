@@ -1,0 +1,34 @@
+package com.message.mapper;
+
+import com.message.model.Friendmap;
+import com.message.model.FriendmapExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+public interface FriendmapMapper {
+    int countByExample(FriendmapExample example);
+
+    int deleteByExample(FriendmapExample example);
+
+    int deleteByPrimaryKey(Integer friendmapid);
+
+    int insert(Friendmap record);
+
+    int insertSelective(Friendmap record);
+    
+    List<Friendmap> selectByExample(FriendmapExample example);
+    
+    int selectStateByExample(FriendmapExample example);
+    
+    int selectCountFriend(Integer userid);
+    
+    Friendmap selectByPrimaryKey(Integer friendmapid);
+    
+    int updateByExampleSelective(@Param("record") Friendmap record, @Param("example") FriendmapExample example);
+
+    int updateByExample(@Param("record") Friendmap record, @Param("example") FriendmapExample example);
+
+    int updateByPrimaryKeySelective(Friendmap record);
+
+    int updateByPrimaryKey(Friendmap record);
+}
